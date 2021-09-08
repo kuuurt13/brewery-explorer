@@ -1,4 +1,10 @@
 .nav {
+  display: flex;
+  align-items: center;
   padding: 0 1rem;
   border-bottom: solid 1px grey;
+}
+
+.themeToggle {
+  margin-left: auto;
 }

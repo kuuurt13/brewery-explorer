@@ -1,6 +1,7 @@
 import Head from "next/head";
 import "normalize.css";
 import Nav from "../components/Nav";
+import { ThemeProvider } from "../hooks/useTheme";
 import "../styles.css";
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 
 export default function MyApp({ Component, pageProps }: Props) {
   return (
-    <>
+    <ThemeProvider>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -28,6 +29,6 @@ export default function MyApp({ Component, pageProps }: Props) {
       <main>
         <Component {...pageProps} />
       </main>
-    </>
+    </ThemeProvider>
   );
 }

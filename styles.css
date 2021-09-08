@@ -1,9 +1,31 @@
+/* THEME */
+:root {
+  --bg-color: #fff;
+  --primary-color: #302ae6;
+  --secondary-color: #536390;
+  --font-color: #424242;
+  --heading-color: #292922;
+}
+
+[data-theme="dark"] {
+  --bg-color: #161625;
+  --primary-color: #9a97f3;
+  --secondary-color: #818cab;
+  --font-color: #e1e1ff;
+  --heading-color: #818cab;
+}
+
+/* GLOBAL STYLES */
+
 * {
   font-family: "Roboto", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
   font-family: "Bebas Neue", cursive;
+  color: var(--heading-color);
 }
 
 main {
