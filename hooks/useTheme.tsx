@@ -1,15 +1,6 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
-
-enum Themes {
-  Light = "light",
-  Dark = "dark",
-}
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyle } from "../theme";
 
 type ContextProps = {
   theme: Themes;
@@ -22,12 +13,13 @@ type ProviderProps = {
 
 const ThemeContext = createContext<ContextProps | {}>({});
 
-export function ThemeProvider({ children }: ProviderProps) {
-  const [theme, setTheme] = useState(Themes.Light);
+export enum Themes {
+  Light = "light",
+  Dark = "dark",
+}
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+export function ThemeContextProvider({ children }: ProviderProps) {
+  const [theme, setTheme] = useState(Themes.Light);
 
   function toggleTheme() {
     setTheme((currentTheme) =>
@@ -36,14 +28,17 @@ export function ThemeProvider({ children }: ProviderProps) {
   }
 
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        toggleTheme,
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <ThemeProvider theme={theme === Themes.Light ? lightTheme : darkTheme}>
+      <ThemeContext.Provider
+        value={{
+          theme,
+          toggleTheme,
+        }}
+      >
+        <GlobalStyle />
+        {children}
+      </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
 
