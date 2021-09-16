@@ -13,10 +13,7 @@ const Button = forwardRef(
   ({ title, href }: ButtonProps, ref: ForwardedRef<HTMLAnchorElement>) => (
     <a href={href} ref={ref}>
       <h3>{title}</h3>
-      <StyledArrow>
-        <div></div>
-        <div></div>
-      </StyledArrow>
+      <StyledArrow></StyledArrow>
     </a>
   )
 );
@@ -33,21 +30,20 @@ export default function ButtonLink(props: Props) {
 
 const StyledArrow = styled.div`
   position: relative;
-  max-width: 6%;
+  max-width: 2vw;
+  top: -5px;
+  right: 1px;
   margin-left: auto;
   transition: 500ms ease-in-out;
+  border: solid 1px ${({ theme }) => theme.colors.font};
 
-  div:first-child {
-    width: 100%;
-    border: solid 1px ${({ theme }) => theme.colors.font};
-  }
-
-  div:last-child {
+  &::after {
+    content: "";
     position: absolute;
     width: 0;
     height: 0;
-    right: -5px;
-    top: -4px;
+    right: -2px;
+    top: -5px;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 5px solid ${({ theme }) => theme.colors.font};
@@ -68,7 +64,7 @@ const StyledWrapper = styled.div`
   }
 
   &:hover ${StyledArrow} {
-    max-width: 7%;
+    max-width: 2.5vw;
   }
 
   &:hover h3 {

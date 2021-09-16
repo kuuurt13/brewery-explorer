@@ -6,6 +6,12 @@ type Props = {
   brewery: Brewery;
 };
 
+type ServerSideProps = {
+  params: {
+    id: string;
+  };
+};
+
 export default function BreweryDetails({ brewery }: Props) {
   return (
     <div>
@@ -17,12 +23,6 @@ export default function BreweryDetails({ brewery }: Props) {
     </div>
   );
 }
-
-type ServerSideProps = {
-  params: {
-    id: string;
-  };
-};
 
 export const getServerSideProps = async ({ params }: ServerSideProps) => {
   const brewery = await getBreweryById(params.id);

@@ -6,7 +6,7 @@ const ButtonLinkList = styled.div`
   justify-content: space-between;
 
   > div {
-    flex: 0 0 32.5%;
+    flex: 0 0 29.5%;
     margin-bottom: 1.3%;
   }
 `;
