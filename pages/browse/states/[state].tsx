@@ -1,18 +1,30 @@
 import Link from "next/link";
 import { getBreweriesByState } from "../../../api";
+import ButtonLink from "../../../components/ButtonLink";
+import ButtonLinkList from "../../../components/ButtonLinkList";
 import states from "../../../data/states.json";
-import { Brewery, State } from "../../../types";
+import { Brewery } from "../../../types";
 
 type Props = {
   breweries: Brewery[];
 };
 
+type StaticProps = {
+  params: {
+    state: string;
+  };
+};
+
 export default function BreweriesByState({ breweries }: Props) {
-  return breweries.map((brewery) => (
-    <div key={brewery.id}>
-      <Link href={`/breweries/${brewery.id}`}>{brewery.name}</Link>
-    </div>
-  ));
+  return (
+    <ButtonLinkList>
+      {breweries.map((brewery) => (
+        <div key={brewery.id}>
+          <ButtonLink href={`/breweries/${brewery.id}`} title={brewery.name} />
+        </div>
+      ))}
+    </ButtonLinkList>
+  );
 }
 
 export async function getStaticPaths() {
@@ -22,12 +34,6 @@ export async function getStaticPaths() {
 
   return { paths, fallback: false };
 }
-
-type StaticProps = {
-  params: {
-    state: string;
-  };
-};
 
 export async function getStaticProps({ params }: StaticProps) {
   const breweries = await getBreweriesByState(params.state);

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import styled from "styled-components";
 import Nav from "../components/Nav";
 import { ThemeContextProvider } from "../hooks/useTheme";
 
@@ -24,9 +25,13 @@ export default function MyApp({ Component, pageProps }: Props) {
       </Head>
 
       <Nav />
-      <main>
+      <StyledMain>
         <Component {...pageProps} />
-      </main>
+      </StyledMain>
     </ThemeContextProvider>
   );
 }
+
+const StyledMain = styled.main`
+  margin: 0.5rem 5rem;
+`;
