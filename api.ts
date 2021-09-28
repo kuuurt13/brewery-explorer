@@ -10,6 +10,7 @@ import {
   BreweryMappingLocation,
   BreweryMappingResult,
 } from "./types";
+import { mapProperties } from "./utils";
 
 const PAGE_SIZE = 50;
 
@@ -30,7 +31,8 @@ export async function getBreweriesByState(
 
 export async function getBreweryById(id: string): Promise<BreweryDetails> {
   const res = await fetch(`${OBDB_BASE_URL}/${id}`);
-  const brewery = await res.json();
+  const rawBrewery = await res.json();
+  const brewery = mapProperties(rawBrewery, { postal_code: "zip" });
 
   const details = await getBreweryMappingDetails(brewery);
   const locationDetails = await getBreweryMappingLocation(details.id);
@@ -46,11 +48,10 @@ export async function getBreweryMappingDetails(
     `${BEER_MAPPING_BASE_URL}/locquery/${BEER_MAPPING_API_KEY}/${brewery.name}&s=json`
   );
   const breweriesResults: BreweryMappingResult[] = await res.json();
+  // Normalizes 12345-123 zip codes
+  const zip = brewery.zip.split("-")[0];
 
-  return (
-    breweriesResults.find((result) => result.zip === brewery.postal_code) ||
-    breweriesResults[0]
-  );
+  return breweriesResults.find((r) => r.zip === zip) || breweriesResults[0];
 }
 
 async function getBreweryMappingLocation(
@@ -75,6 +76,7 @@ async function getBreweryMappingImage(
     `${BEER_MAPPING_BASE_URL}/locimage/${BEER_MAPPING_API_KEY}/${id}&s=json`
   );
   const breweryImages: BreweryMappingImage[] = await res.json();
+
   return breweryImages[0];
 }
 
