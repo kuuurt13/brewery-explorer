@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
 const ButtonLinkList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  > div {
-    flex: 0 0 29.5%;
-    margin-bottom: 1.3%;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
 `;
 
 export default ButtonLinkList;
