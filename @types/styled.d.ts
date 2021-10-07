@@ -11,4 +11,6 @@ declare module "styled-components" {
       heading: string;
     };
   }
+
+  export type Theme = DefaultTheme;
 }

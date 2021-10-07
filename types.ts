@@ -60,3 +60,10 @@ export type BreweryDetails = Brewery & {
   image?: BreweryMappingImage;
   locationDetails: BreweryMappingLocation;
 };
+
+export type BreweryList = {
+  name: string;
+  id: string;
+  totalBreweries: number;
+  breweries: Brewery[];
+};

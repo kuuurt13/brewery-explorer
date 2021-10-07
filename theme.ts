@@ -1,24 +1,24 @@
-import { createGlobalStyle, DefaultTheme } from "styled-components";
+import { createGlobalStyle, Theme } from "styled-components";
 import "normalize.css";
 import "react-toggle/style.css";
 
-export const lightTheme: DefaultTheme = {
+export const lightTheme: Theme = {
   colors: {
     background: "#fff",
-    primary: "#302ae6",
+    primary: "#ffe97c",
     secondary: "#536390",
     font: "#424242",
     heading: "#292922",
   },
 };
 
-export const darkTheme: DefaultTheme = {
+export const darkTheme: Theme = {
   colors: {
     background: "#161625",
-    primary: "#9a97f3",
+    primary: "#ffe97c",
     secondary: "#818cab",
     font: "#e1e1ff",
-    heading: "#818cab",
+    heading: "#ffe97c",
   },
 };
 

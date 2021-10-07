@@ -1,53 +1,45 @@
-import { useState } from "react";
 import styled from "styled-components";
-import ButtonLink from "../components/ButtonLink";
-import ButtonLinkList from "../components/ButtonLinkList";
-import ListSearch from "../components/ListSearch";
-import states from "../data/states.json";
-import { State } from "../types";
+import BarChart from "../components/charts/BarChart";
+import useBreweries from "../hooks/useBreweries";
+import { sortByProperty } from "../utils";
 
-type Props = {
-  states: State[];
-};
+export default function Home() {
+  const allBreweries = useBreweries();
+  const [mostBreweries, leastBreweries] = getBreweriesByStates();
 
-export default function Home({ states }: Props) {
-  const [filteredStates, setFilteredStates] = useState(states);
+  function getBreweriesByStates() {
+    const sortedBreweries = sortByProperty(allBreweries, "totalBreweries").map(
+      (stateBreweries) => ({
+        name: stateBreweries.name,
+        value: stateBreweries.totalBreweries,
+      })
+    );
+
+    return [sortedBreweries.slice(0, 10), sortedBreweries.slice(-10).reverse()];
+  }
 
   return (
-    <StyledWrapper>
-      <ListSearch
-        searchProperty="name"
-        placeholder="Search States"
-        results={states}
-        onResultsChange={setFilteredStates}
-      />
-      <ButtonLinkList>
-        {filteredStates.map((state) => (
-          <ButtonLink
-            key={state.id}
-            href={`/browse/states/${state.id}`}
-            title={state.name}
-          />
-        ))}
-      </ButtonLinkList>
-    </StyledWrapper>
+    <>
+      <StyledSection>
+        <h2>Most Breweries By State</h2>
+        <StyledChartWrapper>
+          <BarChart data={mostBreweries} barTitle="Breweries" />
+        </StyledChartWrapper>
+      </StyledSection>
+      <StyledSection>
+        <h2>Least Breweries By State</h2>
+        <StyledChartWrapper>
+          <BarChart data={leastBreweries} barTitle="Breweries" />
+        </StyledChartWrapper>
+      </StyledSection>
+    </>
   );
 }
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  & > *:first-child {
-    width: 40%;
-    margin: 1rem auto 3rem auto;
-  }
+const StyledSection = styled.section`
+  margin-bottom: 7rem;
 `;
 
-export async function getStaticProps() {
-  return {
-    props: {
-      states,
-    },
-  };
-}
+const StyledChartWrapper = styled.div`
+  height: 60vh;
+`;

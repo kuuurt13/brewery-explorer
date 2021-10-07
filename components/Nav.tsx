@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import useTheme, { Themes } from "../hooks/useTheme";
+import useTheme, { ThemeTypes } from "../hooks/useTheme";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
-  const { theme, toggleTheme } = useTheme();
+  const { themeType, toggleTheme } = useTheme();
 
   return (
     <StyledNav>
       <h1>Brewery Explorer</h1>
       <ThemeToggle
-        checked={theme === Themes.Dark}
+        checked={themeType === ThemeTypes.Dark}
         onChange={() => toggleTheme()}
       />
     </StyledNav>

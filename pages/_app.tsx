@@ -2,6 +2,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Nav from "../components/Nav";
 import { ThemeContextProvider } from "../hooks/useTheme";
+import { BreweriesContextProvider } from "../hooks/useBreweries";
 
 type Props = {
   Component: React.JSXElementConstructor<any>;
@@ -25,9 +26,11 @@ export default function MyApp({ Component, pageProps }: Props) {
       </Head>
 
       <Nav />
-      <StyledMain>
-        <Component {...pageProps} />
-      </StyledMain>
+      <BreweriesContextProvider>
+        <StyledMain>
+          <Component {...pageProps} />
+        </StyledMain>
+      </BreweriesContextProvider>
     </ThemeContextProvider>
   );
 }
