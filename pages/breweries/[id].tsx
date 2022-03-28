@@ -1,7 +1,7 @@
-import { GetServerSideProps } from "next";
 import { getBreweryById } from "../../api";
+import BreweryDetailsHeader from "../../components/BreweryDetailsHeader";
 import Map from "../../components/Map";
-import { Brewery, BreweryDetails } from "../../types";
+import { BreweryDetails } from "../../types";
 
 type Props = {
   brewery: BreweryDetails;
@@ -15,18 +15,13 @@ type ServerSideProps = {
 
 export default function BreweryDetailsPage({ brewery }: Props) {
   return (
-    <div>
-      <h1>{brewery.name}</h1>
-      <div>{brewery.street}</div>
-      <div>
-        {brewery.city} {brewery.state} {brewery.city}
-      </div>
-      <div>{!!brewery.image && <img src={brewery.image.imageurl} />}</div>
+    <>
+      <BreweryDetailsHeader brewery={brewery} />
       <Map
         lng={brewery.locationDetails?.lng}
         lat={brewery.locationDetails?.lat}
       />
-    </div>
+    </>
   );
 }
 

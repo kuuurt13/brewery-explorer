@@ -23,11 +23,9 @@ export default function Home({ states }: Props) {
       />
       <ButtonLinkList>
         {filteredStates.map((state) => (
-          <ButtonLink
-            key={state.id}
-            href={`/browse/states/${state.id}`}
-            title={state.name}
-          />
+          <ButtonLink key={state.id} href={`/browse/states/${state.id}`}>
+            {state.name}
+          </ButtonLink>
         ))}
       </ButtonLinkList>
     </StyledWrapper>

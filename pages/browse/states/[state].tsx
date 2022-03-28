@@ -30,11 +30,9 @@ export default function BreweriesByState({ breweries }: Props) {
       />
       <ButtonLinkList>
         {filteredBreweries.map((brewery) => (
-          <ButtonLink
-            key={brewery.id}
-            href={`/breweries/${brewery.id}`}
-            title={brewery.name}
-          />
+          <ButtonLink key={brewery.id} href={`/breweries/${brewery.id}`}>
+            {brewery.name}
+          </ButtonLink>
         ))}
       </ButtonLinkList>
     </StyledWrapper>

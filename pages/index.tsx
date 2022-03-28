@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import BarChart from "../components/charts/BarChart";
+import BarChart from "../components/BarChart";
+import ButtonLink from "../components/ButtonLink";
 import useBreweries from "../hooks/useBreweries";
 import { sortByProperty } from "../utils";
 
@@ -32,6 +33,9 @@ export default function Home() {
           <BarChart data={leastBreweries} barTitle="Breweries" />
         </StyledChartWrapper>
       </StyledSection>
+      <StyledButtonLink href="/browse">
+        Explorer Breweries By State
+      </StyledButtonLink>
     </>
   );
 }
@@ -42,4 +46,9 @@ const StyledSection = styled.section`
 
 const StyledChartWrapper = styled.div`
   height: 60vh;
+`;
+
+const StyledButtonLink = styled(ButtonLink)`
+  max-width: 250px;
+  margin: 5rem auto;
 `;

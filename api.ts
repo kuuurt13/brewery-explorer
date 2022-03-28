@@ -20,13 +20,12 @@ export async function getBreweriesByState(
   page: number = 0
 ): Promise<Brewery[]> {
   const data = await fetchBreweriesByState(stateName, (page += 1));
-  breweries = [...breweries, ...data];
 
   if (data.length < PAGE_SIZE) {
-    return breweries;
+    return [...breweries, ...data];
   }
 
-  return await getBreweriesByState(stateName, breweries, page);
+  return await getBreweriesByState(stateName, [...breweries, ...data], page);
 }
 
 export async function getBreweryById(id: string): Promise<BreweryDetails> {
@@ -47,9 +46,10 @@ export async function getBreweryMappingDetails(
   const res = await fetch(
     `${BEER_MAPPING_BASE_URL}/locquery/${BEER_MAPPING_API_KEY}/${brewery.name}&s=json`
   );
+  console.log(res);
   const breweriesResults: BreweryMappingResult[] = await res.json();
   // Normalizes 12345-123 zip codes
-  const zip = brewery.zip.split("-")[0];
+  const [zip] = brewery.zip.split("-");
 
   return breweriesResults.find((r) => r.zip === zip) || breweriesResults[0];
 }

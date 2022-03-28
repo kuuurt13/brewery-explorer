@@ -24,7 +24,6 @@ export default function MyApp({ Component, pageProps }: Props) {
           rel="stylesheet"
         />
       </Head>
-
       <Nav />
       <BreweriesContextProvider>
         <StyledMain>

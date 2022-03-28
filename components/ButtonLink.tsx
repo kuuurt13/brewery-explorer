@@ -1,30 +1,29 @@
 import { ForwardedRef, forwardRef } from "react";
-import Link, { LinkProps } from "next/link";
+import NextLink, { LinkProps } from "next/link";
 import styled from "styled-components";
 
 type Props = {
   href: string;
-  title: string;
+  children: string;
+  className?: string;
 };
 
-type ButtonProps = LinkProps & Props;
-
-const Button = forwardRef(
-  ({ title, href }: ButtonProps, ref: ForwardedRef<HTMLAnchorElement>) => (
+const Link = forwardRef(
+  ({ href, children }: Props, ref: ForwardedRef<HTMLAnchorElement>) => (
     <a href={href} ref={ref}>
-      <h3>{title}</h3>
+      <h3>{children}</h3>
       <StyledArrow></StyledArrow>
     </a>
   )
 );
 
-export default function ButtonLink(props: Props) {
+export default function ButtonLink({ href, className, ...props }: Props) {
   return (
-    <Link href={props.href} passHref>
-      <StyledWrapper>
-        <Button {...props} />
+    <NextLink href={href} passHref>
+      <StyledWrapper className={className}>
+        <Link href={href} {...props} />
       </StyledWrapper>
-    </Link>
+    </NextLink>
   );
 }
 

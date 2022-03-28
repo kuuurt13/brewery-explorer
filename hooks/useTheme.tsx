@@ -25,7 +25,7 @@ const themes = {
 };
 
 export function ThemeContextProvider({ children }: ProviderProps) {
-  const [themeType, setTheme] = useState(ThemeTypes.Light);
+  const [themeType, setTheme] = useState(ThemeTypes.Dark);
 
   function toggleTheme() {
     setTheme((currentTheme) =>
